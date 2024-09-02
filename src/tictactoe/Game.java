@@ -10,6 +10,8 @@ public class Game extends javax.swing.JFrame {
     private String player1;
     private String player2;
 
+    private boolean finishedGame = false;
+
     HashMap<Integer, String> map = new HashMap<>();
 
     private boolean turnPlayer = true;
@@ -19,6 +21,9 @@ public class Game extends javax.swing.JFrame {
         player2 = p2;
         initComponents();
         this.setLocationRelativeTo(null);
+
+        btnPlayAgain.setVisible(false);
+        btnPlayOthers.setVisible(false);
 
         lblTurnPlayer.setText(p1);
     }
@@ -45,7 +50,7 @@ public class Game extends javax.swing.JFrame {
 
     private void validateMov(int k) {
 
-        if (map.get(k) != null) {
+        if (map.get(k) != null || finishedGame) {
             return;
         }
 
@@ -107,8 +112,22 @@ public class Game extends javax.swing.JFrame {
             if (full) {
                 System.out.println("It's a Draw!");
                 JOptionPane.showMessageDialog(this, "It's a Draw!", "Game Over", JOptionPane.INFORMATION_MESSAGE);
+                finishedGame = true;
             }
+        } else {
+            finishedGame = true;
         }
+
+        finish();
+    }
+
+    private void finish() {
+
+        if (finishedGame) {
+            btnPlayAgain.setVisible(true);
+            btnPlayOthers.setVisible(true);
+        }
+
     }
 
     @SuppressWarnings("unchecked")
@@ -132,6 +151,8 @@ public class Game extends javax.swing.JFrame {
         lbl8 = new javax.swing.JLabel();
         lbl9 = new javax.swing.JLabel();
         lblTurnPlayer = new javax.swing.JLabel();
+        btnPlayOthers = new javax.swing.JButton();
+        btnPlayAgain = new javax.swing.JButton();
 
         jInternalFrame1.setVisible(true);
 
@@ -287,6 +308,22 @@ public class Game extends javax.swing.JFrame {
         lblTurnPlayer.setForeground(new java.awt.Color(255, 255, 255));
         jPanel1.add(lblTurnPlayer, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 20, 80, 40));
 
+        btnPlayOthers.setText("Elegir otros jugadores");
+        btnPlayOthers.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPlayOthersActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnPlayOthers, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 570, 200, 60));
+
+        btnPlayAgain.setText("Jugar de nuevo");
+        btnPlayAgain.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPlayAgainActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnPlayAgain, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 570, 200, 60));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -295,7 +332,7 @@ public class Game extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 599, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 599, Short.MAX_VALUE)
         );
 
         pack();
@@ -337,6 +374,14 @@ public class Game extends javax.swing.JFrame {
         setIcon(lbl9, 8);
     }//GEN-LAST:event_lbl9MouseClicked
 
+    private void btnPlayOthersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlayOthersActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnPlayOthersActionPerformed
+
+    private void btnPlayAgainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlayAgainActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnPlayAgainActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -373,6 +418,8 @@ public class Game extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnPlayAgain;
+    private javax.swing.JButton btnPlayOthers;
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
